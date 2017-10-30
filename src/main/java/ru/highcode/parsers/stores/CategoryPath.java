@@ -1,0 +1,44 @@
+package ru.highcode.parsers.stores;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class CategoryPath {
+    private final List<String> pathSegments = new ArrayList<>();
+
+    private CategoryPath() {
+    }
+
+    public List<String> getPathSegments() {
+        return Collections.unmodifiableList(pathSegments);
+    }
+
+    public static CategoryPath get(String... segments) {
+        if (segments.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        final CategoryPath result = new CategoryPath();
+        for (final String segment : segments) {
+            result.pathSegments.add(segment);
+        }
+        return result;
+    }
+
+    public static CategoryPath get(Category category) {
+        // TODO: rewrite
+        final Category parent = category.getParent();
+        if (parent == null) {
+            return CategoryPath.get(category.getName());
+        }
+
+        final ArrayList<String> segments = new ArrayList<>(CategoryPath.get(parent).getPathSegments());
+        segments.add(category.getName());
+        return get(segments.toArray(new String[segments.size()]));
+    }
+
+    @Override
+    public String toString() {
+        return String.join(" -> ", pathSegments);
+    }
+}
