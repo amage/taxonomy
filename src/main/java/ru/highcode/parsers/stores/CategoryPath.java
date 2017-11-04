@@ -37,6 +37,18 @@ public class CategoryPath {
         return get(segments.toArray(new String[segments.size()]));
     }
 
+    public boolean isSame(CategoryPath path) {
+        if (path.getPathSegments().size() != this.getPathSegments().size()) {
+            return false;
+        }
+        for (int i = 0; i < getPathSegments().size(); i++) {
+            if (!getPathSegments().get(i).equals(path.getPathSegments().get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return String.join(" -> ", pathSegments);
