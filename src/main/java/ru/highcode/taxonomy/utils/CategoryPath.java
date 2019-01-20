@@ -1,4 +1,6 @@
-package ru.highcode.parsers.stores;
+package ru.highcode.taxonomy.utils;
+
+import ru.highcode.taxonomy.Category;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +31,7 @@ public class CategoryPath {
         // TODO: rewrite
         final Category parent = category.getParent();
         if (parent == null) {
-            return CategoryPath.get(category.getName());
+            return get(category.getName());
         }
 
         final ArrayList<String> segments = new ArrayList<>(CategoryPath.get(parent).getPathSegments());

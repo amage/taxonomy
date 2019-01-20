@@ -1,25 +1,30 @@
-package ru.highcode.parsers.stores;
+package ru.highcode.taxonomy;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class represent a labeled set of items with same attributes.
+ */
 public class Category {
+    private final Classification classification;
     private final String name;
     private final String url;
     private final String imgURL;
     private final List<Category> subCategories = new ArrayList<>();
-    private final List<Good> goods = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     private Category parent;
 
     public Category(String name, String url) {
-        this(name, url, "");
+        this(name, url, "", null);
     }
 
-    public Category(String name, String url, String imgURL) {
+    public Category(String name, String url, String imgURL, Classification classification) {
         this.name = name;
         this.url = url;
         this.imgURL = imgURL;
+        this.classification = classification;
         validate();
     }
 
@@ -51,13 +56,13 @@ public class Category {
         return "Category [name=" + name + "]";
     }
 
-    public boolean addGood(Good good) {
-        good.getCategories().add(this);
-        return goods.add(good);
+    public boolean addGood(Item item) {
+        item.getCategories().add(this);
+        return items.add(item);
     }
 
-    public List<Good> getGoods() {
-        return Collections.unmodifiableList(goods);
+    public List<Item> getItems() {
+        return Collections.unmodifiableList(items);
     }
 
     public String getImgURL() {

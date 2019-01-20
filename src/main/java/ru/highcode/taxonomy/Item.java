@@ -1,9 +1,13 @@
-package ru.highcode.parsers.stores;
+package ru.highcode.taxonomy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Good {
+public class Item {
+    private final Map<String, Object> attributes = new HashMap<>();
+
     private String article;
     private String url;
     private String title;
@@ -42,7 +46,7 @@ public class Good {
 
     @Override
     public String toString() {
-        return "Good [article=" + article + "\n url=" + url + ",\n title=" + title + ",\n price=" + price
+        return "Item [article=" + article + "\n url=" + url + ",\n title=" + title + ",\n price=" + price
                 + ",\n imagesURLs=" + imagesURLs
                 + ",\n description=" + description + "]";
     }

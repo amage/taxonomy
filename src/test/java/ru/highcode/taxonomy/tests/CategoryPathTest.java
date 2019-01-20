@@ -1,11 +1,12 @@
-package ru.highcode.parsers.stores.tests;
+package ru.highcode.taxonomy.tests;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import ru.highcode.parsers.stores.Category;
-import ru.highcode.parsers.stores.CategoryPath;
+import ru.highcode.taxonomy.Category;
+import ru.highcode.taxonomy.utils.CategoryPath;
 
 public class CategoryPathTest {
 
@@ -17,7 +18,7 @@ public class CategoryPathTest {
         root.addSubCategory(middle);
         middle.addSubCategory(leaf);
 
-        assertEquals("root", CategoryPath.get(root).toString());
+        Assert.assertEquals("root", CategoryPath.get(root).toString());
         assertEquals("root -> middle", CategoryPath.get(middle).toString());
         assertEquals("root -> middle -> leaf", CategoryPath.get(leaf).toString());
     }
