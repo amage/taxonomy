@@ -3,6 +3,7 @@ package ru.highcode.taxonomy.utils;
 import ru.highcode.taxonomy.Category;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,22 +22,19 @@ public class CategoryPath {
             throw new IllegalArgumentException();
         }
         final CategoryPath result = new CategoryPath();
-        for (final String segment : segments) {
-            result.pathSegments.add(segment);
-        }
+        result.pathSegments.addAll(Arrays.asList(segments));
         return result;
     }
 
     public static CategoryPath get(Category category) {
         // TODO: rewrite
-        final Category parent = category.getParent();
-        if (parent == null) {
-            return get(category.getName());
+        if (category.isRoot()) {
+            return get(category.getId());
         }
 
-        final ArrayList<String> segments = new ArrayList<>(CategoryPath.get(parent).getPathSegments());
-        segments.add(category.getName());
-        return get(segments.toArray(new String[segments.size()]));
+        final ArrayList<String> segments = new ArrayList<>(CategoryPath.get(category.getParents().get(0)).getPathSegments());
+        segments.add(category.getId());
+        return get(segments.toArray(new String[0]));
     }
 
     public boolean isSame(CategoryPath path) {

@@ -12,9 +12,9 @@ public class CategoryPathTest {
 
     @Test
     public void testForCategory() {
-        final Category root = new Category("root", "");
-        final Category middle = new Category("middle", "");
-        final Category leaf = new Category("leaf", "");
+        final Category root = new Category("root");
+        final Category middle = new Category("middle");
+        final Category leaf = new Category("leaf");
         root.addSubCategory(middle);
         middle.addSubCategory(leaf);
 

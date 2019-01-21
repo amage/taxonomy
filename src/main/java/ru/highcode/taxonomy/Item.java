@@ -7,68 +7,23 @@ import java.util.Map;
 
 public class Item {
     private final Map<String, Object> attributes = new HashMap<>();
+    private String id;
 
-    private String article;
-    private String url;
-    private String title;
-    private double price;
-    private String description;
-    private final List<String> imagesURLs = new ArrayList<>();
     private final List<Category> categories = new ArrayList<>();
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public List<String> getImagesURLs() {
-        return imagesURLs;
-    }
-
-    @Override
-    public String toString() {
-        return "Item [article=" + article + "\n url=" + url + ",\n title=" + title + ",\n price=" + price
-                + ",\n imagesURLs=" + imagesURLs
-                + ",\n description=" + description + "]";
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getArticle() {
-        return article;
-    }
-
-    public void setArticle(String article) {
-        this.article = article;
-    }
 
     public List<Category> getCategories() {
         return categories;
     }
 
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    public void addCategory(Category category) {
+        category.getAttributeDefaults().forEach((k, v) -> {
+            if (!attributes.containsKey(k)) {
+                attributes.put(k, v);
+            }
+        });
+    }
 }

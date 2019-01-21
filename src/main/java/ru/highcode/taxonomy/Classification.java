@@ -11,6 +11,7 @@ public class Classification {
     private final Classification parent;
     private final List<Classification> children = new ArrayList<>();
     private final Map<String, Class> attributeDescriptions = new HashMap<>();
+    private final Map<String, Object> attributeDefaults = new HashMap<>();
 
     public Classification(String id) {
         this.id = id;
@@ -37,5 +38,9 @@ public class Classification {
 
     public Map<String, Class> getAttributeDescriptions() {
         return attributeDescriptions;
+    }
+
+    public Map<String, Object> getAttributeDefaults() {
+        return attributeDefaults;
     }
 }
