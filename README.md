@@ -1,2 +1,3 @@
-# shoptoolkit
-Java class set to make shop processing more easy.
+# Taxonomy
+
+Let's make it very complicated.
