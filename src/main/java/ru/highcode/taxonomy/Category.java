@@ -28,20 +28,20 @@ public class Category {
         if (!attributeDefaults.isEmpty()) {
             attributeDefaults.clear();
         }
+        // TODO inhere parents attribute
         attributeDefaults.putAll(classification.getAttributeDefaults());
     }
 
-    // TOSO rework me
-    public boolean addSubCategory(Category category) {
+    public boolean addChild(Category category) {
         category.getParents().add(this);
         return children.add(category);
     }
 
-    public List<Category> getSubCategories() {
-        return Collections.unmodifiableList(children);
+    public List<Category> getChildren() {
+        return children;
     }
 
-    public boolean addGood(Item item) {
+    public boolean addItem(Item item) {
         return item.getCategories().add(this);
     }
 

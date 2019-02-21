@@ -15,8 +15,8 @@ public class CategoryPathTest {
         final Category root = new Category("root");
         final Category middle = new Category("middle");
         final Category leaf = new Category("leaf");
-        root.addSubCategory(middle);
-        middle.addSubCategory(leaf);
+        root.addChild(middle);
+        middle.addChild(leaf);
 
         Assert.assertEquals("root", CategoryPath.get(root).toString());
         assertEquals("root -> middle", CategoryPath.get(middle).toString());

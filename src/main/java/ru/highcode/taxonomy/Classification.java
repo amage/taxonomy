@@ -21,7 +21,10 @@ public class Classification {
     public Classification(String id, Classification parent) {
         this.id = id;
         this.parent = parent;
-        parent.children.add(this);
+        if (parent != null) {
+            parent.children.add(this);
+        }
+        initAttributes();
     }
 
     public String getId() {
@@ -42,5 +45,24 @@ public class Classification {
 
     public Map<String, Object> getAttributeDefaults() {
         return attributeDefaults;
+    }
+
+    private void initAttributes() {
+        if (parent == null) {
+            return;
+        }
+        parent.initAttributes();
+        for (Map.Entry<String, Class> descEntry : parent.getAttributeDescriptions().entrySet()) {
+            if (attributeDescriptions.containsKey(descEntry.getKey())) {
+                if (!Objects.equals(attributeDescriptions.get(descEntry.getKey()), descEntry.getValue())) {
+                    throw new IllegalStateException();
+                }
+            } else {
+                attributeDescriptions.put(descEntry.getKey(), descEntry.getValue());
+            }
+        }
+        for (Map.Entry<String, Object> defEntry : parent.getAttributeDefaults().entrySet()) {
+            attributeDefaults.put(defEntry.getKey(), defEntry.getValue());
+        }
     }
 }
